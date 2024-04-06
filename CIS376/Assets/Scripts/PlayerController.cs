@@ -6,19 +6,36 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(TouchingDirections))]
 public class PlayerController : MonoBehaviour
 {
     public float walkSpeed = 5f;
+    public float jumpSpeed = 10f;
     Vector2 moveInput;
     
     
     //Component objects
     Rigidbody2D rigidBody;
     Animator animator;
+    TouchingDirections touchingDirections;
 
-    [SerializeField] private bool _isMoving = false;
+    public float currentMoveSpeed{
+    
+        get
+        {
+            if(IsMoving && !touchingDirections.IsOnWall)
+            {
+                return walkSpeed;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+    }
 
     //Sets isMoving parameter in Animator 
+    [SerializeField] private bool _isMoving = false;    
     public bool IsMoving { 
         get
         {
@@ -55,6 +72,7 @@ public class PlayerController : MonoBehaviour
     {
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        touchingDirections = GetComponent<TouchingDirections>();
         
     }
 
@@ -72,7 +90,9 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rigidBody.velocity = new Vector2(moveInput.x * walkSpeed, rigidBody.velocity.y);
+        rigidBody.velocity = new Vector2(moveInput.x * currentMoveSpeed, rigidBody.velocity.y);
+        animator.SetFloat(AnimationStrings.yVelocity, rigidBody.velocity.y);
+      
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -80,8 +100,18 @@ public class PlayerController : MonoBehaviour
         moveInput = context.ReadValue<Vector2>();
 
         IsMoving = moveInput != Vector2.zero;
-
+ 
         setFacingDirection(moveInput);
+    }
+
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        //TODO also check for player alive
+        if(context.started && touchingDirections.IsGrounded)
+        {
+            animator.SetTrigger(AnimationStrings.jump);
+            rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpSpeed);
+        }
     }
 
     private void setFacingDirection(Vector2 moveInput)
@@ -96,4 +126,6 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+
+   
 }
