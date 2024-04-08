@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -23,9 +24,16 @@ public class PlayerController : MonoBehaviour
     
         get
         {
-            if(IsMoving && !touchingDirections.IsOnWall)
+            if(canMove)
             {
-                return walkSpeed;
+                    if(IsMoving && !touchingDirections.IsOnWall)
+                {
+                    return walkSpeed;
+                }
+                else
+                {
+                    return 0;
+                }
             }
             else
             {
@@ -46,6 +54,12 @@ public class PlayerController : MonoBehaviour
             _isMoving = value;
             animator.SetBool(AnimationStrings.isMoving, value);        
         } 
+    }
+
+    public bool canMove{
+        get{
+            return animator.GetBool(AnimationStrings.canMove);
+        }
     }
 
     //player facing
@@ -107,11 +121,19 @@ public class PlayerController : MonoBehaviour
     public void OnJump(InputAction.CallbackContext context)
     {
         //TODO also check for player alive
-        if(context.started && touchingDirections.IsGrounded)
+        if(context.started && touchingDirections.IsGrounded && canMove)
         {
-            animator.SetTrigger(AnimationStrings.jump);
+            animator.SetTrigger(AnimationStrings.jumpTrigger);
             rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpSpeed);
         }
+    }
+
+    public void OnAttack(InputAction.CallbackContext context)
+    {        
+        if(context.started)
+        {
+            animator.SetTrigger(AnimationStrings.attackTrigger);
+        }        
     }
 
     private void setFacingDirection(Vector2 moveInput)
