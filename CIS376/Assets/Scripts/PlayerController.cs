@@ -12,6 +12,14 @@ public class PlayerController : MonoBehaviour
 {
     public float walkSpeed = 5f;
     public float jumpSpeed = 10f;
+    public bool IsAlive
+    {
+        get
+        {
+            return animator.GetBool(AnimationStrings.isAlive);
+        }
+        
+    }
     Vector2 moveInput;
     
     
@@ -112,10 +120,16 @@ public class PlayerController : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
-
-        IsMoving = moveInput != Vector2.zero;
- 
-        setFacingDirection(moveInput);
+        if(IsAlive)
+        {
+            IsMoving = moveInput != Vector2.zero; 
+            setFacingDirection(moveInput);
+        }
+        else
+        {
+            IsMoving = false;
+        }
+        
     }
 
     public void OnJump(InputAction.CallbackContext context)

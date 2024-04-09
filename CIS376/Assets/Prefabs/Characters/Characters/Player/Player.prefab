@@ -11,11 +11,12 @@ GameObject:
   - component: {fileID: 4243556807496777847}
   - component: {fileID: 3003519514418461829}
   - component: {fileID: 6881842336748195419}
-  - component: {fileID: 4123025212428341806}
   - component: {fileID: 7868691120240942156}
   - component: {fileID: 6703015832895197073}
   - component: {fileID: 2055679777551205864}
+  - component: {fileID: 4123025212428341806}
   - component: {fileID: 7812725429172360749}
+  - component: {fileID: 640669878933515319}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -117,22 +118,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &4123025212428341806
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3470251303195621927}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4663478900ecfdd4eb8fca264a3414fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  walkSpeed: 10
-  jumpSpeed: 13
-  _isMoving: 0
-  _isFacingRight: 1
 --- !u!114 &7868691120240942156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -311,6 +296,22 @@ CapsuleCollider2D:
   m_Offset: {x: 0.017258763, y: -0.20689243}
   m_Size: {x: 0.593426, y: 1.75567}
   m_Direction: 0
+--- !u!114 &4123025212428341806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3470251303195621927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4663478900ecfdd4eb8fca264a3414fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkSpeed: 10
+  jumpSpeed: 13
+  _isMoving: 0
+  _isFacingRight: 1
 --- !u!114 &7812725429172360749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,3 +344,19 @@ MonoBehaviour:
   _isGrounded: 0
   _isOnWall: 0
   _isOnCeiling: 0
+--- !u!114 &640669878933515319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3470251303195621927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aece21804981c3d43bf6e4903e8dcd1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isInvincible: 0
+  _isAlive: 1
+  _health: 100
+  _maxHealth: 100
