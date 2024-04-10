@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(TouchingDirections))]
+[RequireComponent(typeof(Damageable))]
 public class PlayerController : MonoBehaviour
 {
     public float walkSpeed = 5f;
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rigidBody;
     Animator animator;
     TouchingDirections touchingDirections;
+    Damageable damageable;
 
     public float currentMoveSpeed{
     
@@ -95,6 +97,7 @@ public class PlayerController : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         touchingDirections = GetComponent<TouchingDirections>();
+        damageable = GetComponent<Damageable>();
         
     }
 
@@ -112,7 +115,10 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rigidBody.velocity = new Vector2(moveInput.x * currentMoveSpeed, rigidBody.velocity.y);
+        if(!damageable.IsHit)
+        {
+            rigidBody.velocity = new Vector2(moveInput.x * currentMoveSpeed, rigidBody.velocity.y);
+        }        
         animator.SetFloat(AnimationStrings.yVelocity, rigidBody.velocity.y);
       
     }
@@ -163,5 +169,8 @@ public class PlayerController : MonoBehaviour
 
     }
 
-   
+   public void OnHit(int damage, Vector2 knockBack)
+   {
+        rigidBody.velocity = new Vector2 (knockBack.x, rigidBody.velocity.y + knockBack.y);
+   }
 }

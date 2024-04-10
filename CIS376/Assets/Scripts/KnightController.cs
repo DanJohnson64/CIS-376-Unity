@@ -5,13 +5,17 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(TouchingDirections))]
+
 public class KnightController : MonoBehaviour
 {
     //Game Component attributes
     Rigidbody2D rigidBody;
     TouchingDirections touchingDirections;
     Animator animator;
+    Damageable damageable;
+    
     public DetectionZone attackZone;
+    public DetectionZone ledgeDetection;
 
     // Class properties 
     public float walkSpeed = 3f;
@@ -37,10 +41,26 @@ public class KnightController : MonoBehaviour
         }
     }
 
+    public float AttackCooldown
+    {
+        get
+        {
+            return animator.GetFloat(AnimationStrings.attackCooldown);
+        }
+        set 
+        {
+            animator.SetFloat(AnimationStrings.attackCooldown, Mathf.Max(value,0));
+        }
+    }
+
+
+
     // Walking direction detection and set
+    private Vector2 walkDirectionVector = Vector2.right;
     public enum WalkableDirection {right, left};
     private WalkableDirection _walkDirection;
     public WalkableDirection WalkDirection
+    
     {
         get{return _walkDirection;}
         set{
@@ -60,22 +80,28 @@ public class KnightController : MonoBehaviour
             }
             _walkDirection = value;}
     }
-    private Vector2 walkDirectionVector = Vector2.right;
+
+   
+
+
+
 
     //Initialization 
     public void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
         touchingDirections = GetComponent<TouchingDirections>();
-        animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>(); 
+        damageable = GetComponent<Damageable>();
     }
 
-    // Physics related fixed interval update
+    // Physics related functions, fixed interval update
     public void FixedUpdate()
     {   
         if(touchingDirections.IsOnWall && touchingDirections.IsGrounded)
         {
-            flipDirection();
+            flipDirection();            
+
         }
 
         if(CanMove)
@@ -92,6 +118,10 @@ public class KnightController : MonoBehaviour
     void Update()
     {
         hasTarget = attackZone.detectedColliders.Count > 0;
+        if (AttackCooldown > 0)
+        { 
+            AttackCooldown -= Time.deltaTime; 
+        } 
     }
 
     // switches walking direction
@@ -108,5 +138,18 @@ public class KnightController : MonoBehaviour
         
 
     }    
+
+    public void OnHit(int damage, Vector2 knockBack)
+    {
+        rigidBody.velocity = new Vector2(knockBack.x, rigidBody.velocity.y + knockBack.y);
+    }
+
+    public void OnNoGroundDetected()
+    {
+        if(touchingDirections.IsGrounded)
+        {
+            flipDirection();
+        }
+    }
   
 }

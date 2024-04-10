@@ -1,13 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Damageable : MonoBehaviour
 {
+    public UnityEvent<int,Vector2> damageableHit;
     Animator animator;
-    [SerializeField] private bool isInvincible = false; 
+    [SerializeField] private bool isInHitStun = false;
+
+    public bool IsHit 
+    { 
+        get
+        {
+            return animator.GetBool(AnimationStrings.isHit);
+        } 
+        private set
+        {
+            animator.SetBool(AnimationStrings.isHit, value);
+        }
+    }
+
     private float timeSinceHit = 0;
-    private float invincibilityTime = 0.25f;
+    private float hitStunTime = 0.25f;
     [SerializeField]private bool _isAlive = true;
     public bool IsAlive
     {
@@ -19,7 +34,7 @@ public class Damageable : MonoBehaviour
         {
             _isAlive = value;
             animator.SetBool(AnimationStrings.isAlive, value);
-            Debug.Log("IsAlive set to" + _isAlive);
+            
         }
     }
     [SerializeField]private int _health = 100;
@@ -60,26 +75,31 @@ public class Damageable : MonoBehaviour
 
     private void Update()
     {
-        if(isInvincible)
+        if(isInHitStun)
         {
-            if(timeSinceHit > invincibilityTime)
+            if(timeSinceHit > hitStunTime)
             {
-                isInvincible = false;
+                isInHitStun = false;
                 timeSinceHit = 0;
             }
             timeSinceHit += Time.deltaTime;
         }
-        takeDamage(10);
-        Debug.Log("health at " + Health);
+        
     }
 
-    public void takeDamage(int damage)
+    public bool takeDamage(int damage, Vector2 knockBack)
     {
-        if(IsAlive && !isInvincible)
+        if(IsAlive && !isInHitStun)
         {
             Health -= damage;
-            isInvincible = true;
+            isInHitStun = true;
+            IsHit = true;
+            //if not null, notify other subscribed components that damage was taken and to apply knock back
+            damageableHit?.Invoke(damage, knockBack);
+            return true;
         }
+        //unable to take damage
+        return false;
     }
  
 }
