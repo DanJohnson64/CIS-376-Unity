@@ -134,7 +134,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2084993600664001328}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -496,10 +496,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackZone: {fileID: 2528395670111128219}
-  ledgeDetection: {fileID: 5511342492890456117}
-  walkSpeed: 3
+  moveSpeed: 3
   walkStopRate: 0.05
   _hasTarget: 0
+  ledgeDetection: {fileID: 5511342492890456117}
 --- !u!114 &9070577413864076716
 MonoBehaviour:
   m_ObjectHideFlags: 0
