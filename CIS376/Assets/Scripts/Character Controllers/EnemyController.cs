@@ -3,22 +3,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Required components for Enemy Object
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(TouchingDirections))]
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Damageable))]
 
-public class KnightController : MonoBehaviour
+public class EnemyController : MonoBehaviour
 {
     //Game Component attributes
-    Rigidbody2D rigidBody;
-    TouchingDirections touchingDirections;
-    Animator animator;
-    Damageable damageable;
-    
+    protected Rigidbody2D rigidBody;
+    protected TouchingDirections touchingDirections;
+    protected Animator animator;
+    protected Damageable damageable;    
     public DetectionZone attackZone;
-    public DetectionZone ledgeDetection;
+    
 
-    // Class properties 
-    public float walkSpeed = 3f;
+    /// <summary>
+    /// Class properties
+    /// setters will set value to animator also 
+    /// </summary>
+    public float moveSpeed = 3f;
     public float walkStopRate = 0.4f;
     public bool _hasTarget = false;
     public bool hasTarget{
@@ -55,36 +60,40 @@ public class KnightController : MonoBehaviour
 
 
 
-    // Walking direction detection and set
-    private Vector2 walkDirectionVector = Vector2.right;
-    public enum WalkableDirection {right, left};
-    private WalkableDirection _walkDirection;
-    public WalkableDirection WalkDirection
+    // Moving direction detection getter and setter
+    protected Vector2 moveDirectionVector = Vector2.right;
+    public enum movableDirection {right, left, up, down};
+    private movableDirection _moveDirection;
+    public movableDirection MoveDirection
     
     {
-        get{return _walkDirection;}
+        get{return _moveDirection;}
         set{
-            if(_walkDirection != value)
+            if(_moveDirection != value)
             {
                 gameObject.transform.localScale = new Vector2(gameObject.transform.localScale.x * -1, gameObject.transform.localScale.y);
 
-                if(value == WalkableDirection.right)
+                if(value == movableDirection.right)
                 {
-                    walkDirectionVector = Vector2.right;
+                    moveDirectionVector = Vector2.right;
                 }
-                else if(value == WalkableDirection.left)
+                else if(value == movableDirection.left)
                 {
-                    walkDirectionVector = Vector2.left;
+                    moveDirectionVector = Vector2.left;
                 }
+                else if(value == movableDirection.up)
+                {
+                    moveDirectionVector = Vector2.up;
+                }
+                else if(value == movableDirection.down)
+                {
+                    moveDirectionVector = Vector2.down;
+                }
+                
 
             }
-            _walkDirection = value;}
-    }
-
-   
-
-
-
+            _moveDirection = value;}
+    } 
 
     //Initialization 
     public void Awake()
@@ -95,61 +104,30 @@ public class KnightController : MonoBehaviour
         damageable = GetComponent<Damageable>();
     }
 
-    // Physics related functions, fixed interval update
+    // Physics related functions and behavior, fixed interval update. 
     public void FixedUpdate()
     {   
-        if(touchingDirections.IsOnWall && touchingDirections.IsGrounded)
-        {
-            flipDirection();            
 
-        }
 
-        if(CanMove)
-        {
-            rigidBody.velocity = new Vector2(walkSpeed * walkDirectionVector.x, rigidBody.velocity.y);
-        }
-        else
-        {
-            rigidBody.velocity = new Vector2(Mathf.Lerp(rigidBody.velocity.x,0,walkStopRate),rigidBody.velocity.y);
-        }
     }
 
     // called every frame
     void Update()
     {
+        //if detected player collider, hasTarget is true
         hasTarget = attackZone.detectedColliders.Count > 0;
+
+        //set timer for attack cooldown
         if (AttackCooldown > 0)
         { 
             AttackCooldown -= Time.deltaTime; 
         } 
-    }
-
-    // switches walking direction
-    private void flipDirection()
-    {
-        if(WalkDirection == WalkableDirection.right)
-        {
-            WalkDirection = WalkableDirection.left;
-        }
-        else if(WalkDirection == WalkableDirection.left)
-        {
-            WalkDirection = WalkableDirection.right;
-        }
-        
-
-    }    
+    }   
 
     public void OnHit(int damage, Vector2 knockBack)
     {
+        //set knock back for attack
         rigidBody.velocity = new Vector2(knockBack.x, rigidBody.velocity.y + knockBack.y);
-    }
-
-    public void OnNoGroundDetected()
-    {
-        if(touchingDirections.IsGrounded)
-        {
-            flipDirection();
-        }
     }
   
 }
