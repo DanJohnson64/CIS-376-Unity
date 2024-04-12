@@ -56,7 +56,7 @@ public class Attack : MonoBehaviour
         }
     }
 
-    void OnDrawGizmos()
+    /*void OnDrawGizmos()
     {
 
         if (attackCollider == null)
@@ -85,5 +85,5 @@ public class Attack : MonoBehaviour
         }
         if (!isActive)
             attackCollider.enabled = false;
-    }
+    }*/
 }
