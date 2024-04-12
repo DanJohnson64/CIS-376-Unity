@@ -30,6 +30,9 @@ public class PlayerController : MonoBehaviour
     TouchingDirections touchingDirections;
     Damageable damageable;
 
+    //Class Attributes
+    [SerializeField] private float rollSpeed = 3f;
+
     public float currentMoveSpeed{
     
         get
@@ -117,6 +120,7 @@ public class PlayerController : MonoBehaviour
     {
         if(!damageable.IsHit)
         {
+            
             rigidBody.velocity = new Vector2(moveInput.x * currentMoveSpeed, rigidBody.velocity.y);
         }        
         animator.SetFloat(AnimationStrings.yVelocity, rigidBody.velocity.y);
@@ -154,6 +158,14 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetTrigger(AnimationStrings.attackTrigger);
         }        
+    }
+
+    public void OnRoll(InputAction.CallbackContext context)
+    {
+        if(context.started && touchingDirections.IsGrounded && canMove && IsMoving)
+        {
+            animator.SetTrigger(AnimationStrings.rollTrigger);
+        }
     }
 
     private void setFacingDirection(Vector2 moveInput)

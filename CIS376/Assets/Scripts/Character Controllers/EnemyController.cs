@@ -122,7 +122,21 @@ public class EnemyController : MonoBehaviour
         { 
             AttackCooldown -= Time.deltaTime; 
         } 
-    }   
+    }
+
+    protected void flipDirection()
+    {
+        if (MoveDirection == movableDirection.right)
+        {
+            MoveDirection = movableDirection.left;
+        }
+        else if (MoveDirection == movableDirection.left)
+        {
+            MoveDirection = movableDirection.right;
+        }
+
+
+    }
 
     public void OnHit(int damage, Vector2 knockBack)
     {

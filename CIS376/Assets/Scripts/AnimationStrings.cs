@@ -7,7 +7,7 @@ public class AnimationStrings
     internal static string isMoving = "isMoving";
     internal static string isGrounded = "isGrounded";
     internal static string attackTrigger = "attackTrigger";
-    internal static string isRolling = "isRolling";
+    internal static string rollTrigger = "rollTrigger";
     internal static string isDamaged = "isDamaged";
     internal static string yVelocity = "yVelocity";
     internal static string jumpTrigger = "jumpTrigger";
@@ -18,4 +18,5 @@ public class AnimationStrings
     internal static string isAlive = "isAlive";
     internal static string isHit = "isHit";
     internal static string attackCooldown = "attackCooldown";
+    
 }

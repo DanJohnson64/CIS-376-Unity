@@ -57,20 +57,7 @@ public class KnightController : EnemyController
             rigidBody.velocity = new Vector2(Mathf.Lerp(rigidBody.velocity.x,0,walkStopRate),rigidBody.velocity.y);
         }
     }
-
-    private void flipDirection()
-    {
-        if(MoveDirection == movableDirection.right)
-        {
-            MoveDirection = movableDirection.left;
-        }
-        else if(MoveDirection == movableDirection.left)
-        {
-            MoveDirection = movableDirection.right;
-        }
-        
-
-    }    
+    
 
     public void OnNoGroundDetected()
     {
