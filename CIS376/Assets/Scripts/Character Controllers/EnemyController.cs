@@ -143,5 +143,10 @@ public class EnemyController : MonoBehaviour
         //set knock back for attack
         rigidBody.velocity = new Vector2(knockBack.x, rigidBody.velocity.y + knockBack.y);
     }
+
+    public void OnDie()
+    {
+
+    }
   
 }

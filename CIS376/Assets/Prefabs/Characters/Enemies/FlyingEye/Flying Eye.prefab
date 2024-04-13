@@ -192,8 +192,8 @@ MonoBehaviour:
       m_Calls: []
   isInHitStun: 0
   _isAlive: 1
-  _health: 3
-  _maxHealth: 3
+  _health: 2
+  _maxHealth: 2
 --- !u!114 &4358967668803403498
 MonoBehaviour:
   m_ObjectHideFlags: 0

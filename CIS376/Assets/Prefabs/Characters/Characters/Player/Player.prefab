@@ -123,9 +123,10 @@ GameObject:
   - component: {fileID: 43042174535389139}
   - component: {fileID: 7812725429172360749}
   - component: {fileID: 640669878933515319}
+  - component: {fileID: 7373971692653659313}
   m_Layer: 7
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -362,6 +363,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 50f363b3-934d-4f2d-bf68-e1c27662de77
     m_ActionName: Player/Roll[/Keyboard/leftShift]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2e72fc62-fbbb-41c2-bd07-98595c488a70
+    m_ActionName: UI/Escape[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -503,6 +508,19 @@ MonoBehaviour:
   _isAlive: 0
   _health: 2
   _maxHealth: 3
+--- !u!114 &7373971692653659313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3470251303195621927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec6fa0a4e111d8a44a1c9a7fe44d0497, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points: 0
 --- !u!1 &4542682514930298524
 GameObject:
   m_ObjectHideFlags: 0
