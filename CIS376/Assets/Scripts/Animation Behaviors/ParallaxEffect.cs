@@ -28,7 +28,7 @@ public class ParallaxEffect : MonoBehaviour
     // Decides which clipping plane to use from the Camera
     float clippingPlane => (cam.transform.position.z + (zDistanceFromTarget > 0 ? cam.farClipPlane : cam.nearClipPlane));
 
-    // Decides the strength og the parallax effect 
+    // Decides the strength of the parallax effect 
     float parallaxFactor => MathF.Abs(zDistanceFromTarget) / clippingPlane;
 
     // Start is called before the first frame update

@@ -56,34 +56,5 @@ public class Attack : MonoBehaviour
         }
     }
 
-    /*void OnDrawGizmos()
-    {
 
-        if (attackCollider == null)
-            return;
-
-        bool isActive = attackCollider.enabled;
-
-        if (!isActive)
-            attackCollider.enabled = true;
-
-        if (alwaysShowCollider)
-        {            
-            PolygonCollider2D polygonCollider = (PolygonCollider2D)attackCollider;
-            Handles.color = Color.green;
-            Vector3 position = transform.position;
-            for (int i = 0; i < polygonCollider.pathCount; i++)
-            {
-                Vector2[] points = polygonCollider.GetPath(i);
-                for (int j = 0; j < points.Length; j++)
-                {
-                    int nextIndex = (j + 1) % points.Length;
-                    Handles.DrawLine(position + (Vector3)points[j], position + (Vector3)points[nextIndex]);
-                }
-            }
-            
-        }
-        if (!isActive)
-            attackCollider.enabled = false;
-    }*/
 }

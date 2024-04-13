@@ -192,8 +192,8 @@ MonoBehaviour:
       m_Calls: []
   isInHitStun: 0
   _isAlive: 1
-  _health: 10
-  _maxHealth: 10
+  _health: 3
+  _maxHealth: 3
 --- !u!114 &4358967668803403498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -409,6 +409,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 391b936a0b8b5c644b6b609b1916d24f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 10
+  attackDamage: 1
   knockBack: {x: 5, y: 0}
   alwaysShowCollider: 0

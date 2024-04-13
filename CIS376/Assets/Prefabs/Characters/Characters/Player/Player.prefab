@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 391b936a0b8b5c644b6b609b1916d24f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 10
+  attackDamage: 1
   knockBack: {x: 3, y: 1}
   alwaysShowCollider: 1
 --- !u!1 &3470251303195621927
@@ -500,9 +500,9 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   isInHitStun: 0
-  _isAlive: 1
-  _health: 100
-  _maxHealth: 100
+  _isAlive: 0
+  _health: 2
+  _maxHealth: 3
 --- !u!1 &4542682514930298524
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,7 +606,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 391b936a0b8b5c644b6b609b1916d24f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 10
+  attackDamage: 1
   knockBack: {x: 3, y: 1}
   alwaysShowCollider: 1
 --- !u!1 &4982293271402598205
@@ -718,7 +718,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 391b936a0b8b5c644b6b609b1916d24f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 10
+  attackDamage: 1
   knockBack: {x: 3, y: 1}
   alwaysShowCollider: 1
 --- !u!1 &5087635782829545699
@@ -827,7 +827,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 391b936a0b8b5c644b6b609b1916d24f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 10
+  attackDamage: 1
   knockBack: {x: 3, y: 1}
   alwaysShowCollider: 1
 --- !u!1 &8362671479369815509
@@ -938,6 +938,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 391b936a0b8b5c644b6b609b1916d24f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 10
+  attackDamage: 1
   knockBack: {x: 3, y: 1}
   alwaysShowCollider: 1

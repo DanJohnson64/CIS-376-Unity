@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
         {
             if(canMove)
             {
-                    if(IsMoving && !touchingDirections.IsOnWall)
+                if(IsMoving && !touchingDirections.IsOnWall)
                 {
                     return walkSpeed;
                 }
@@ -119,8 +119,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         if(!damageable.IsHit)
-        {
-            
+        {            
             rigidBody.velocity = new Vector2(moveInput.x * currentMoveSpeed, rigidBody.velocity.y);
         }        
         animator.SetFloat(AnimationStrings.yVelocity, rigidBody.velocity.y);

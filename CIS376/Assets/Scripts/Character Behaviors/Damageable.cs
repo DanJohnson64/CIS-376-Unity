@@ -1,3 +1,4 @@
+using Assets.Scripts.Events;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class Damageable : MonoBehaviour
     public UnityEvent<int,Vector2> damageableHit;
     Animator animator;
     [SerializeField] private bool isInHitStun = false;
+
 
     public bool IsHit 
     { 
@@ -53,8 +55,8 @@ public class Damageable : MonoBehaviour
             }
         }
     }
-    [SerializeField]private int _maxHealth = 100;
-    
+
+    [SerializeField]private int _maxHealth = 100;  
 
     public int MaxHealth
     {
@@ -94,12 +96,28 @@ public class Damageable : MonoBehaviour
             Health -= damage;
             isInHitStun = true;
             IsHit = true;
+
             //if not null, notify other subscribed components that damage was taken and to apply knock back
             damageableHit?.Invoke(damage, knockBack);
+
+            //invoke damaged event
+            CharacterEvents.characterDamaged.Invoke(gameObject, damage);
             return true;
         }
-        //unable to take damage
+
+        //if unable to take damage
         return false;
+    }
+
+    public void heal(int healthRestore)
+    {
+        if (IsAlive && Health != MaxHealth)
+        {
+            int maxHeal = Mathf.Max(MaxHealth - Health,0);
+            Health += Mathf.Min(maxHeal, healthRestore);
+
+            CharacterEvents.characterHealed.Invoke(gameObject, healthRestore);
+        }
     }
  
 }
