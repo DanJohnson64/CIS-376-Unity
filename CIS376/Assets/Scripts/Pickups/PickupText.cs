@@ -8,7 +8,7 @@ public class PointsText : MonoBehaviour
     //Game Component objects 
     RectTransform textTransform;
     TextMeshProUGUI textMeshPro;
-    TMP_Text childText;
+    
 
     //Class variables
     public Vector3 moveSpeed = Vector3.up;
@@ -22,8 +22,7 @@ public class PointsText : MonoBehaviour
     private void Awake()
     {
        textTransform= GetComponent<RectTransform>();
-       textMeshPro = GetComponent<TextMeshProUGUI>();
-       childText= GetComponentInChildren<TMP_Text>();
+       textMeshPro = GetComponent<TextMeshProUGUI>();       
        startColor = textMeshPro.color;
     }
 

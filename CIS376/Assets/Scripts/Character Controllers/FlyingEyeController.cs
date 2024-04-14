@@ -63,9 +63,7 @@ public class FlyingEyeController : EnemyController
                 wayPointNumber = 0;
             }
             
-            nextWaypoint = wayPoints[wayPointNumber];
-            Debug.Log("waypoint number is " + wayPointNumber);
-            Debug.Log("waypoint count is " + wayPoints.Count);
+            nextWaypoint = wayPoints[wayPointNumber];            
             wayPointNumber++;
         }
 

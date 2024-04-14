@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
 namespace Assets.Scripts.Events
@@ -18,5 +13,7 @@ namespace Assets.Scripts.Events
 
         //player gained points
         public static UnityAction<GameObject, int> characterPointGet;
+
+        public static UnityAction<GameObject,int> enemyKilled;
     }
 }

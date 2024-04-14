@@ -1,3 +1,4 @@
+using Assets.Scripts.Events;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine;
 public class pointsPickup : Pickup
 {
     public int pointGet = 100;
+    public AudioSource pickupSource;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +21,8 @@ public class pointsPickup : Pickup
         if (pointManager)
         {
             pointManager.getPoints(pointGet);
-            
+            CharacterEvents.characterPointGet.Invoke(gameObject,pointGet);
+            AudioSource.PlayClipAtPoint(pickupSource.clip, gameObject.transform.position, pickupSource.volume);
             Destroy(gameObject);
         }
     }

@@ -8,40 +8,17 @@ public class KnightController : EnemyController
     public DetectionZone ledgeDetection;
     
     
-    // Class properties 
- 
-
-
-
-    // Walking direction detection and set
-    /*private Vector2 walkDirectionVector = Vector2.right;
-    public enum WalkableDirection {right, left};
-    private WalkableDirection _walkDirection;
-    public WalkableDirection WalkDirection
     
-    {
-        get{return _walkDirection;}
-        set{
-            if(_walkDirection != value)
-            {
-                gameObject.transform.localScale = new Vector2(gameObject.transform.localScale.x * -1, gameObject.transform.localScale.y);
+    // Class properties 
 
-                if(value == WalkableDirection.right)
-                {
-                    walkDirectionVector = Vector2.right;
-                }
-                else if(value == WalkableDirection.left)
-                {
-                    walkDirectionVector = Vector2.left;
-                }
-
-            }
-            _walkDirection = value;}
-    }*/
 
     // Override FixedUpdate
     new public void FixedUpdate()
     {   
+        if(hasTarget && CanMove)
+        {
+            rigidBody.velocity = new Vector2(moveSpeed * moveDirectionVector.x + attackTargetXPosition, rigidBody.velocity.y);
+        }
         if(touchingDirections.IsOnWall && touchingDirections.IsGrounded)
         {
             flipDirection();            

@@ -809,3 +809,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58beab47404586340ac37376eb1d61d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pointText: {fileID: 4769935273528502138}

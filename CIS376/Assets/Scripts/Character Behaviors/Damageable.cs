@@ -8,6 +8,7 @@ public class Damageable : MonoBehaviour
 {
     public UnityEvent<int,Vector2> damageableHit;
     public UnityEvent<int, int> healthChanged;
+    
     Animator animator;
     [SerializeField] private bool isInHitStun = false;
 
@@ -36,7 +37,12 @@ public class Damageable : MonoBehaviour
         set
         {
             _isAlive = value;
+            if (!_isAlive && gameObject.tag == "Enemy")
+            {
+                CharacterEvents.enemyKilled.Invoke(gameObject, 100);
+            }
             animator.SetBool(AnimationStrings.isAlive, value);
+            
             
         }
     }
@@ -102,8 +108,6 @@ public class Damageable : MonoBehaviour
             //if not null, notify other subscribed components that damage was taken and to apply knock back
             damageableHit?.Invoke(damage, knockBack);
 
-            //invoke damaged event
-            CharacterEvents.characterDamaged.Invoke(gameObject, damage);
             return true;
         }
 

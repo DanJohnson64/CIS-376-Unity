@@ -1,13 +1,7 @@
 using Assets.Scripts.Events;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.Android;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
 
 public class UIManager : MonoBehaviour
 {
@@ -27,23 +21,33 @@ public class UIManager : MonoBehaviour
     {        
         CharacterEvents.characterHealed += characterHealed;
         CharacterEvents.characterPointGet += pointsGained;
+        CharacterEvents.enemyKilled += enemyKilledPoints; 
+        
     }
 
     private void OnDisable()
     {       
         CharacterEvents.characterHealed -= characterHealed;
         CharacterEvents.characterPointGet -= pointsGained;
+        CharacterEvents.enemyKilled += enemyKilledPoints;
     }
 
     //spawns points text at character location displaying the amount of points gained
     public void pointsGained(GameObject character, int pointsGained)
     {
         Vector3 spawnPosition = Camera.main.WorldToScreenPoint(character.transform.position);
-        TMP_Text tmpText = Instantiate(pointsTextPrefab, spawnPosition, Quaternion.identity, gameCanvas.transform).GetComponent<TMP_Text>();    
-        tmpText.text = pointsGained.ToString();
+        TMP_Text tmpText = Instantiate(pointsTextPrefab, spawnPosition, Quaternion.identity, gameCanvas.transform).GetComponent<TMP_Text>();   
         totalPoints += pointsGained;
-        
-        
+        tmpText.text = pointsGained.ToString();
+
+    }
+
+    public void enemyKilledPoints(GameObject character, int pointsKilled)
+    {
+        Vector3 spawnPosition = Camera.main.WorldToScreenPoint(character.transform.position);
+        TMP_Text tmpText = Instantiate(pointsTextPrefab, spawnPosition, Quaternion.identity, gameCanvas.transform).GetComponent<TMP_Text>();
+        totalPoints += pointsKilled;
+        tmpText.text = pointsKilled.ToString();
     }
 
     

@@ -1,8 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data.Common;
-//using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -31,7 +26,7 @@ public class PlayerController : MonoBehaviour
     Damageable damageable;
 
     //Class Attributes
-    [SerializeField] private float rollSpeed = 3f;
+    
 
     public float currentMoveSpeed{
     
