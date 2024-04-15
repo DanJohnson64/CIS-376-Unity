@@ -1,4 +1,6 @@
 QuickQuest
+Game Design/Programming - Dan Johnson
+Player Character Sprite Art - Taylor Gumbs
 
 To open in Unity:
 -Make sure to have Unity Version 2022.3.22f1 installed
