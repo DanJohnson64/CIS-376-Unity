@@ -15,5 +15,7 @@ namespace Assets.Scripts.Events
         public static UnityAction<GameObject, int> characterPointGet;
 
         public static UnityAction<GameObject,int> enemyKilled;
+
+       
     }
 }

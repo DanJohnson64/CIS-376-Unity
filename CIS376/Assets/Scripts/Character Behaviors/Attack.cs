@@ -10,7 +10,6 @@ public class Attack : MonoBehaviour
     public int attackDamage;
     public Vector2 knockBack = Vector2.zero;
 
-    [SerializeField] bool alwaysShowCollider;
 
     private void Awake()
     {

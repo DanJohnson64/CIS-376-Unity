@@ -1,3 +1,4 @@
+using Assets.Scripts.Events;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,6 +9,7 @@ public class PlayerController : MonoBehaviour
 {
     public float walkSpeed = 5f;
     public float jumpSpeed = 10f;
+    private bool isDead = false;
     public bool IsAlive
     {
         get
@@ -24,6 +26,9 @@ public class PlayerController : MonoBehaviour
     Animator animator;
     TouchingDirections touchingDirections;
     Damageable damageable;
+    PointManager pointmanager;
+    public GameManager gameManager;
+    
 
     //Class Attributes
     
@@ -96,6 +101,7 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         touchingDirections = GetComponent<TouchingDirections>();
         damageable = GetComponent<Damageable>();
+        pointmanager = GetComponent<PointManager>();
         
     }
 
@@ -108,7 +114,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(damageable.Health <= 0)
+        {
+            isDead = true;
+            gameManager.gameOver(pointmanager.points);
+            rigidBody.gravityScale = 0;
+            rigidBody.velocity = new Vector2(0,0);
+        }
     }
 
     private void FixedUpdate()

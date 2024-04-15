@@ -1,7 +1,9 @@
 using Assets.Scripts.Events;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -21,7 +23,7 @@ public class UIManager : MonoBehaviour
     {        
         CharacterEvents.characterHealed += characterHealed;
         CharacterEvents.characterPointGet += pointsGained;
-        CharacterEvents.enemyKilled += enemyKilledPoints; 
+        CharacterEvents.enemyKilled += enemyKilledPoints;
         
     }
 
@@ -29,7 +31,7 @@ public class UIManager : MonoBehaviour
     {       
         CharacterEvents.characterHealed -= characterHealed;
         CharacterEvents.characterPointGet -= pointsGained;
-        CharacterEvents.enemyKilled += enemyKilledPoints;
+        CharacterEvents.enemyKilled -= enemyKilledPoints; 
     }
 
     //spawns points text at character location displaying the amount of points gained
@@ -59,6 +61,9 @@ public class UIManager : MonoBehaviour
         //tmpText.text = healthGained.ToString();
         //TODO increase character health UI
     }
+
+    
+
 
     public void OnExit(InputAction.CallbackContext context)
     {

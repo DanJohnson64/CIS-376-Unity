@@ -23,7 +23,7 @@ public class EnemyController : MonoBehaviour
     public float moveSpeed = 3f;
     public float walkStopRate = 0.4f;
     public bool _hasTarget = false;
-    protected float attackTargetXPosition;
+    protected Vector2 attackTargetPosition;
     public bool hasTarget{
         get
         {
@@ -112,9 +112,11 @@ public class EnemyController : MonoBehaviour
     // called every frame
     void Update()
     {
+        
         //if detected player collider, hasTarget is true
         hasTarget = attackZone.detectedColliders.Count > 0;
-        attackTargetXPosition = attackZone.detectedColliders[0].transform.position.x;
+        
+        
 
         //set timer for attack cooldown
         if (AttackCooldown > 0)

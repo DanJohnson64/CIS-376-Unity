@@ -23,7 +23,7 @@ public class HealthPickup : Pickup
         //If an entity enters this collider and has a damageable component 
         Damageable damageable= collision.GetComponent<Damageable>();
 
-        if(damageable && damageable.Health < damageable.MaxHealth)
+        if(damageable && damageable.isPLayer() && damageable.Health < damageable.MaxHealth)
         {
             damageable.heal(healthRestore);
             AudioSource.PlayClipAtPoint(pickupSource.clip, gameObject.transform.position, pickupSource.volume);

@@ -17,7 +17,7 @@ public class KnightController : EnemyController
     {   
         if(hasTarget && CanMove)
         {
-            rigidBody.velocity = new Vector2(moveSpeed * moveDirectionVector.x + attackTargetXPosition, rigidBody.velocity.y);
+            rigidBody.velocity = new Vector2(moveSpeed * attackTargetPosition.x, rigidBody.velocity.y);
         }
         if(touchingDirections.IsOnWall && touchingDirections.IsGrounded)
         {

@@ -1,6 +1,7 @@
 using Assets.Scripts.Events;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -8,9 +9,12 @@ public class Damageable : MonoBehaviour
 {
     public UnityEvent<int,Vector2> damageableHit;
     public UnityEvent<int, int> healthChanged;
+    public UnityEvent playerKilled;
+    public UnityEvent enemyKilled;
     
     Animator animator;
     [SerializeField] private bool isInHitStun = false;
+    [SerializeField]private bool _isPlayer = false;
 
 
     public bool IsHit 
@@ -35,12 +39,16 @@ public class Damageable : MonoBehaviour
             return _isAlive;
         }
         set
-        {
-            _isAlive = value;
-            if (!_isAlive && gameObject.tag == "Enemy")
+        {   
+            if (value == false && gameObject.tag == "Enemy")
             {
-                CharacterEvents.enemyKilled.Invoke(gameObject, 100);
+                enemyKilled?.Invoke();
             }
+            if(value == false && gameObject.tag == "Player")
+            {
+                playerKilled?.Invoke();
+            }
+            _isAlive = value;            
             animator.SetBool(AnimationStrings.isAlive, value);
             
             
@@ -94,6 +102,11 @@ public class Damageable : MonoBehaviour
             }
             timeSinceHit += Time.deltaTime;
         }
+
+        if(!isPLayer() && transform.position.y <= -100)
+        {
+            Destroy(gameObject);
+        }
         
     }
 
@@ -124,6 +137,11 @@ public class Damageable : MonoBehaviour
 
             CharacterEvents.characterHealed.Invoke(gameObject, healthRestore);
         }
+    }
+
+    public bool isPLayer()
+    {
+        return _isPlayer;  
     }
  
 }
