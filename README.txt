@@ -1,8 +1,13 @@
 QuickQuest
 
+To open in Unity:
+-Make sure to have Unity Version 2022.3.22f1 installed
+-Create local repository with Github and pull the project
+-Open Unity editor and select "Play"
 
-
-
+To run exe on local machine:
+-In the repository navigate to CIS376 > Build > QuickQuest.exe
+-Run QuickQuest.exe
 
 
 
