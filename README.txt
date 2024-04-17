@@ -16,7 +16,6 @@ To run exe on local machine:
 ----Outsourced Asset Credit----
 Audio:
 KL Peach - Game Over III: https://pixabay.com/sound-effects/kl-peach-game-over-iii-142453/
-audio/music/10 Battle1 (8bit style) https://youfulca.itch.io/legendary-jr... 8bit Battle 1 Music
 UNIVERSFIELD - Game Bonus: https://pixabay.com/sound-effects/game-bonus-144751/
 Art:
 art/rvros-adventurer https://rvros.itch.io/animated-pixel-hero
